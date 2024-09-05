@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { IoTrashBinSharp } from 'react-icons/io5';
+import { MdOutlinePreview } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 function InvoiceHistory() {
@@ -65,14 +67,16 @@ function InvoiceHistory() {
                                 <td className='border p-1 text-center'>{invoice.mobile}</td>
                                 <td className='border p-1 text-center'>
                                     <button
-                                        className='bg-red-600 hover:bg-red-300 text-white font-semibold p-2 w-24 rounded'
+                                        className=' font-semibold p-2  rounded text-3xl'
                                         onClick={() => handleDelete(invoice.id)}
                                     >
-                                        Delete
+                                      <IoTrashBinSharp />
+
                                     </button>
 
-                                    <button className='bg-green-700 hover:bg-green-300 text-white p-2 m-5 w-24 rounded'>
-                                        <Link to={"/viewinvoice"}>View</Link>
+                                    <button className=' font-semibold  w-24 rounded text-3xl'>
+                                        <Link to={"/viewinvoice"}><MdOutlinePreview/>
+                                        </Link>
                                     </button>
                                 </td>
                             </tr>
