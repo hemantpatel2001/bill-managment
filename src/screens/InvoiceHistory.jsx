@@ -49,7 +49,7 @@ function InvoiceHistory() {
                 </div>
             </div>
 
-            <div className='p-8 flex justify-center'>
+            <div className='ml-[340px] mt-2' >
                 <table className='w-[600px] bg-white p-4 ml-[90px]'>
                     <thead>
                         <tr>
