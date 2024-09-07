@@ -53,52 +53,58 @@ const AddNewInvoice = () => {
                 >
                     {({ values }) => (
                         <Form className="">
-                            <div>
-                                <label htmlFor="name" className="block text-xl font-medium text-gray-700">Name</label>
-                                <Field
-                                    type="text"
-                                    name="name"
-                                    placeholder="name"
-                                    className="mt-1 block w-full border pl-1 border-black rounded-md shadow-sm " />
-                                <ErrorMessage name="name" component="div" className="text-red-600 text-sm mt-1" />
+                            <div className='flex gap-32'>
+                                <div>
+                                    <label htmlFor="name" className="block text-xl font-medium text-gray-700">Name</label>
+                                    <Field
+                                        type="text"
+                                        name="name"
+                                        placeholder="name"
+                                        className="mt-1 block w-full border p-1 border-black rounded-md shadow-sm " />
+                                    <ErrorMessage name="name" component="div" className="text-red-600 text-sm mt-1" />
+                                </div>
+                                <div>
+                                    <label htmlFor="mobile" className="block text-xl font-medium text-gray-700">Mobile</label>
+                                    <Field
+                                        type="text"
+                                        name="mobile"
+                                        placeholder="Mobile"
+                                        className="mt-1 block w-full border p-1 border-black rounded-md shadow-sm" />
+                                    <ErrorMessage name="mobile" component="div" className="text-red-600 text-sm mt-1" />
+                                </div>
                             </div>
+
 
                             {/* <div>
                                 <label htmlFor="invoiceNumber" className="block text-sm font-medium text-gray-700">Invoice Number</label>
                                 <Field type="text" id="invoiceNumber" name="invoiceNumber" className="mt-1 block border border-black w-full rounded-md shadow-sm" />
                                 <ErrorMessage name="invoiceNumber" component="div" className="text-red-600 text-sm mt-1" />
                             </div> */}
+                            <div className='flex  gap-[100px] mt-2' >
+                                <div>
+                                    <label htmlFor="date" className="block text-xl font-medium text-gray-700">Date</label>
+                                    <Field
+                                        type="date"
+                                        name="date"
+                                        placeholder="date"
+                                        className="mt-1 block w-[180px] border border-black   rounded-md shadow-sm" />
 
-                            <div>
-                                <label htmlFor="date" className="block text-xl font-medium text-gray-700">Date</label>
-                                <Field
-                                    type="date"
-                                    name="date"
-                                    placeholder="date"
-                                    className="mt-1 block w-full border border-black rounded-md shadow-sm" />
+                                    <ErrorMessage name="date" component="div" className="text-red-600 text-sm mt-1" />
+                                </div>
 
-                                <ErrorMessage name="date" component="div" className="text-red-600 text-sm mt-1" />
+
+                                <div>
+                                    <label htmlFor="email" className="block text-xl font-medium text-gray-700">Email</label>
+                                    <Field
+                                        type="email"
+                                        name="email"
+                                        placeholder="test123@gmail.com"
+                                        className="mt-1 block w-full border p-1 border-black rounded-md shadow-sm" />
+                                    <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="mobile" className="block text-xl font-medium text-gray-700">Mobile</label>
-                                <Field
-                                    type="text"
-                                    name="mobile"
-                                    placeholder="Mobile"
-                                    className="mt-1 block w-full border p-1 border-black rounded-md shadow-sm" />
-                                <ErrorMessage name="mobile" component="div" className="text-red-600 text-sm mt-1" />
-                            </div>
 
-                            <div>
-                                <label htmlFor="email" className="block text-xl font-medium text-gray-700">Email</label>
-                                <Field
-                                    type="email"
-                                    name="email"
-                                    placeholder="test123@gmail.com"
-                                    className="mt-1 block w-full border p-1 border-black rounded-md shadow-sm" />
-                                <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
-                            </div>
 
                             <div>
                                 <h3 className="text-xl font-semibold text-gray-900">

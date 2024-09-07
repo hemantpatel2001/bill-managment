@@ -33,8 +33,11 @@ function Login() {
   };
 
   return (
-    <div className='flex justify-center font-semibold m-[120px]'>
-      <div className='flex justify-center items-center w-[300px] h-[200px]'>
+    <div
+      className='flex justify-center items-center h-screen bg-cover bg-center '
+      style={{ backgroundImage: 'url("https://previews.123rf.com/images/279photo/279photo1612/279photo161205273/68221977-payment-terminal-with-card-on-white-background-top-view.jpg")' }}
+    >
+      <div className='bg-opacity-70 rounded shadow-lg p-20 w-[600px]'>
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
@@ -42,43 +45,33 @@ function Login() {
         >
           {({ values, handleChange, isSubmitting }) => (
             <Form>
-              <div className='h-[300px] p-10 pl-32 gap-4'>
-                <h1 className='font-bold text-5xl mb-8 text-sky-800'>Login</h1>
+              <div className='flex flex-col gap-4'>
+                <h1 className='font-bold text-5xl mb-8 text-sky-800 text-center'>Login</h1>
                 <div className='mb-4'>
                   <label className='text-2xl'>Email</label>
-                  <br />
                   <Field
-                    className="border p-1 border-sky-800 placeholder:p-3 text-xl mt-3 w-[400px] outline-none"
+                    className="border p-1 border-sky-800 placeholder:p-3 text-xl mt-3 w-full  outline-none"
                     name="email"
                     type="text"
                     placeholder="Enter your email"
                   />
-
-                  <div className="min-h-[20px]">
-                    <ErrorMessage className='text-red-800 text-2xl' name="email" component="div" />
-                  </div>
+                  <ErrorMessage className='text-red-800 text-2xl' name="email" component="div" />
                 </div>
-                <div className='relative'>
+                <div className='relative mb-4'>
                   <label className='text-2xl'>Password</label>
-                  <br />
                   <Field
-                    className="border p-1  border-sky-800   placeholder:p-3 text-xl mt-3 w-[400px] outline-none"
+                    className="border p-1 border-sky-800 placeholder:p-3 text-xl mt-3 w-full outline-none"
                     name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                   />
-
                   <div className="absolute right-3 top-12 cursor-pointer text-3xl" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </div>
-
-                  <div className="min-h-[20px]">
-                    <ErrorMessage className="text-red-800 text-2xl" name="password" component="div" />
-                  </div>
+                  <ErrorMessage className="text-red-800 text-2xl" name="password" component="div" />
                 </div>
-
                 <button
-                  className='bg-sky-600 text-white border rounded border-black w-[400px] mt-8 text-2xl p-1 h-min-24'
+                  className='bg-sky-600 text-white border rounded border-black w-full text-2xl p-2'
                   disabled={isSubmitting}
                   type="submit"
                 >
@@ -95,3 +88,4 @@ function Login() {
 }
 
 export default Login;
+

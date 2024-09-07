@@ -7,9 +7,9 @@ import { ToastContainer } from 'react-toastify'
 function DashBord() {
     return (
         <div >
-            <div>
+            {/* <div>
                 <Header />
-            </div>
+            </div> */}
 
             <div>
                 <InvoiceHistory />

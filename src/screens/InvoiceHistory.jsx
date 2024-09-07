@@ -24,10 +24,16 @@ function InvoiceHistory() {
     };
 
     return (
-        <div >
+        <div className='flex flex-col'>
 
-            <div className='border bg-stone-300 w-[600px] mt-5 ml-[435px]  '>
-                <h1 className='text-4xl p-4 font-semibold flex justify-center   '>Aarohi Sales Dewas</h1>
+            <div className='border bg-stone-300 w-[600px] mt-14 ml-[435px]  flex  gap-[220px]'>
+                <h1 className='text-4xl p-4 font-semibold'>Aarohi Sales Dewas</h1>
+
+                <button className=" bg-red-500 hover:bg-red-700  h-12 w-32 text-xl mt-3 text-white font-bold  px-4 rounded">
+                    <Link to="/" className="">
+                        Logout
+                    </Link>
+                </button>
             </div>
 
             <div className='flex w-[600px] ml-[435px] mt-5 '>
@@ -67,14 +73,14 @@ function InvoiceHistory() {
                                 <td className='border p-1 text-center'>{invoice.mobile}</td>
                                 <td className='border p-1 text-center'>
                                     <button
-                                        className=' font-semibold p-2  rounded text-4xl  text-red-600 hover:text-red-400'
+                                        className='font-semibold p-2  rounded text-4xl  text-red-600 hover:text-red-400'
                                         onClick={() => handleDelete(invoice.id)}
                                     >
                                         < IoTrashBinSharp />
 
                                     </button>
 
-                                    <button className=' font-semibold  wl-28 rounded text-4xl text-blue-800 hover:text-blue-400'>
+                                    <button className='font-semibold  wl-28 rounded text-4xl text-blue-800 hover:text-blue-400'>
                                         <Link to={"/viewinvoice"}><MdOutlinePreview />
                                         </Link>
                                     </button>
