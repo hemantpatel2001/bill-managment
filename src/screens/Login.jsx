@@ -23,12 +23,12 @@ function Login() {
       toast.success('Login successful! Redirecting to dashboard...');
       setTimeout(() => {
         navigate('/dashboard');
-        actions.setSubmitting(false);  
+        actions.setSubmitting(false);
         actions.resetForm();
-      }, 2000);
+      }, 1000);
     } else {
       toast.error('Invalid email or password. Please try again.');
-      actions.setSubmitting(false); 
+      actions.setSubmitting(false);
     }
   };
 
@@ -37,7 +37,7 @@ function Login() {
       className='flex justify-center items-center h-screen bg-cover bg-center '
       style={{ backgroundImage: 'url("https://previews.123rf.com/images/279photo/279photo1612/279photo161205273/68221977-payment-terminal-with-card-on-white-background-top-view.jpg")' }}
     >
-      <div className='bg-opacity-70 rounded shadow-lg p-20 w-[600px]'>
+      <div className='bg-opacity-70 rounded shadow-lg p-20 w-[500px]'>
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
@@ -50,7 +50,7 @@ function Login() {
                 <div className='mb-4'>
                   <label className='text-2xl'>Email</label>
                   <Field
-                    className="border p-1 border-sky-800 placeholder:p-3 text-xl mt-3 w-full  outline-none"
+                    className="border p-1 border-sky-800 placeholder:p-2 text-xl mt-3 w-full outline-none"
                     name="email"
                     type="text"
                     placeholder="Enter your email"
@@ -65,13 +65,14 @@ function Login() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                   />
-                  <div className="absolute right-3 top-12 cursor-pointer text-3xl" onClick={() => setShowPassword(!showPassword)}>
+
+                  <div className="absolute right-3 top-12 cursor-pointer  text-3xl" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </div>
                   <ErrorMessage className="text-red-800 text-2xl" name="password" component="div" />
                 </div>
                 <button
-                  className='bg-sky-600 text-white border rounded border-black w-full text-2xl p-2'
+                  className='bg-sky-600 text-white border rounded  border-black w-full text-2xl p-2'
                   disabled={isSubmitting}
                   type="submit"
                 >

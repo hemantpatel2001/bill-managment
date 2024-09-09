@@ -7,6 +7,7 @@ import AddNewInvoice from '../screens/AddNewInvoice'
 import ViewInvoice from '../screens/ViewInvoice'
 
 
+
 function Routing() {
   return (
     <div>
@@ -17,6 +18,7 @@ function Routing() {
           <Route path='/dashboard' element={<DashBord />} />
           <Route path='/addnewinvoice' element={<AddNewInvoice />} />
           <Route path='/viewinvoice' element={<ViewInvoice />} />
+
 
         </Routes>
       </BrowserRouter>
