@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../api/slice/ApiSlice';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const validationSchema = yup.object().shape({
@@ -25,18 +26,24 @@ const Login = () => {
 
     login({ email, password })
       .then((response) => {
+       
+        
         const token = response.data.token
         localStorage.setItem("auth", token)
-        toast.success(response.data.msg)
+       
+        
         setSubmitting(false)
         if (token) {
+          toast.success("login successfully")
           navigate("/layout")
+         
         }
       })
       .catch((error) => {
         console.error('Login error:', error);
         toast.error('Login failed. Please try again.');
         setSubmitting(false)
+
       })
 
   };

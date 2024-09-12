@@ -1,11 +1,11 @@
 import { useState } from 'preact/hooks';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
     const [isCustomerDropdownOpen, setIsCustomerDropdownOpen] = useState(false);
     const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
     const [isInvoiceDropdownOpen, setIsInvoiceDropdownOpen] = useState(false);
-
+    const navigate = useNavigate()
     const toggleCustomerDropdown = () => {
         setIsCustomerDropdownOpen(!isCustomerDropdownOpen);
         setIsInvoiceDropdownOpen(false)
@@ -24,16 +24,22 @@ const Sidebar = () => {
         setIsCustomerDropdownOpen(false)
     };
 
+    const HandleLogout = () => {
+        const token = localStorage.clear()
+        navigate("/")
+
+    }
+
     return (
         <div className="w-64 h-scree bg-gray-300 text-black  shadow-lg text-2xl flex flex-col pl-8 gap-2">
- 
 
-            <div  className="p-4 cursor-pointer " >
-             <img className='w-28 h-32 ' src="https://salescrm.aarohiweblogger.com/assets/img/brand/logo.png" 
-             alt="Aarohi sales" 
-             />
+
+            <div className="p-4 cursor-pointer " >
+                <img className='w-28 h-32 ' src="https://salescrm.aarohiweblogger.com/assets/img/brand/logo.png"
+                    alt="Aarohi sales"
+                />
             </div>
-           
+
             <div className="p-4 cursor-pointer  hover:bg-blue-700  font-semibold" onClick={toggleCustomerDropdown}>
                 Customer
             </div>
@@ -52,7 +58,7 @@ const Sidebar = () => {
                 </div>
             )}
 
-          
+
             <div className="p-4 cursor-pointer hover:bg-blue-700  font-semibold" onClick={toggleProductDropdown}>
                 Products
             </div>
@@ -71,7 +77,7 @@ const Sidebar = () => {
                 </div>
             )}
 
-        
+
             <div className="p-4 cursor-pointer hover:bg-blue-700  font-semibold" onClick={toggleInvoiceDropdown}>
                 Invoice
             </div>
@@ -89,6 +95,9 @@ const Sidebar = () => {
                     </Link>
                 </div>
             )}
+            <div className="p-4 cursor-pointer hover:bg-blue-700  font-semibold" >
+                <button onClick={HandleLogout}> Logout</button>
+            </div>
         </div>
     );
 }

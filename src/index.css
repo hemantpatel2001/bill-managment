@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.image{
+    background-image: url("https://tse3.mm.bing.net/th?id=OIP.C2PJjRGlHewmznV33et45AHaHa&pid=Api&P=0&h=220");
+    width: 300px;
+    height: 200px;
+}
+
+
