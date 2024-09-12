@@ -1,13 +1,27 @@
-import { Provider } from "react-redux";
-import Routing from "./sevices/Routing"
-import 'react-toastify/dist/ReactToastify.css';
-import { store } from "./api/store/store";
-export function App() {
+import React from 'react'
+
+import { RouterProvider } from 'react-router-dom';
+
+import router from './Roter/routing';
+import { Provider } from 'react-redux';
+import { store } from './api/store/store';
+import { ToastContainer } from 'react-toastify';
+const App = () => {
   return (
-    <>
-    <Provider store={store}>
-    <Routing />
+
+    <div>
+
+          <Provider store={store}>
+      <div>
+        <RouterProvider router={router} />
+        <ToastContainer/>
+      </div>
     </Provider>
-   </>
-  )
-}
+
+    </div>
+  );
+};
+
+
+export default App
+

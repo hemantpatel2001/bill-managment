@@ -7,9 +7,11 @@ function InvoiceHistory() {
     const [invoices, setInvoices] = useState([
         { id: 1, name: 'nilam', mobile: '7047543221', invoiceId: "2283" },
         { id: 2, name: 'rahul', mobile: '7047543222', invoiceId: "22929" },
-        { id: 1, name: 'nilam', mobile: '7047543221', invoiceId: "2283" },
-        { id: 2, name: 'rahul', mobile: '7047543222', invoiceId: "22929" },
+        { id: 3, name: 'priya', mobile: '7047543221', invoiceId: "2283" },
+        { id: 4, name: 'rohit', mobile: '7047543222', invoiceId: "22929" },
     ]);
+    
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this invoice?");
@@ -18,6 +20,11 @@ function InvoiceHistory() {
             setInvoices(updatedInvoices);
         }
     };
+
+    
+    const filteredInvoices = invoices.filter(invoice =>
+        invoice.mobile.includes(searchTerm)
+    );
 
     return (
         <div className='flex flex-col items-center'>
@@ -37,6 +44,8 @@ function InvoiceHistory() {
                         className='border rounded-xl border-sky-400 h-12 w-full md:w-48 outline-none p-2'
                         type="text"
                         placeholder='Search by mobile'
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button className='border bg-blue-600 hover:bg-blue-300 text-white font-bold rounded-lg h-12 w-full md:w-48 text-xl'>
                         <Link to={"/addnewinvoice"}>
@@ -57,11 +66,17 @@ function InvoiceHistory() {
                         </tr>
                     </thead>
                     <tbody>
-                        {invoices.map((invoice) => (
+                        {filteredInvoices.map((invoice) => (
                             <tr key={invoice.id}>
-                                <td className='border p-2 text-center'>{invoice.invoiceId}</td>
-                                <td className='border p-2 text-center'>{invoice.name}</td>
-                                <td className='border p-2 text-center'>{invoice.mobile}</td>
+                                <td className='border p-2 text-center'>
+                                    {invoice.invoiceId}
+                                </td>
+                                <td className='border p-2 text-center'>
+                                    {invoice.name}
+                                </td>
+                                <td className='border p-2 text-center'>
+                                    {invoice.mobile}
+                                </td>
                                 <td className='border p-2 text-center'>
                                     <button
                                         className='font-semibold p-2 rounded text-3xl md:text-4xl text-red-600 hover:text-red-400'
