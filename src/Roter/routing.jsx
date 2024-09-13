@@ -9,6 +9,8 @@ import AddProducts from '../screens/pages/products/AddProducts';
 import Invoices from '../screens/pages/invoice/Invoices';
 import AddNewInvoice from '../screens/pages/invoice/AddNewInvoice';
 import Login from '../screens/Login';
+import Auth from '../authentic/Auth';
+import WithOutLogin from '../authentic/WithOutLogin';
 
 
 
@@ -16,19 +18,19 @@ const router = createBrowserRouter([
 
     {
         path: '/',
-        element: <Login/>
+        element: <WithOutLogin><Login/></WithOutLogin>
     },
 
     {
         path: '/layout',
-        element: <Layout />,
+        element:<Auth><Layout/></Auth> ,
         children: [
-            { path: 'customers', element: <Customer /> },
-            { path: "new-customer", element: <AddNewCustmor /> },
-            { path: "products", element: <Products /> },
-            { path: "add-product", element: <AddProducts /> },
-            {path:"invoices", element:<Invoices/>},
-            {path:"add-invoice",element:<AddNewInvoice/>}
+            { path: 'customers', element:<Auth><Customer /> </Auth> },
+            { path: "new-customer", element: <Auth><AddNewCustmor /></Auth> },
+            { path: "products", element: <Auth><Products /></Auth> },
+            { path: "add-product", element: <Auth><AddProducts /></Auth> },
+            { path: "invoices", element: <Auth><Invoices /></Auth> },
+            { path: "add-invoice", element: <Auth><AddNewInvoice /></Auth> }
         ],
     },
 ]);

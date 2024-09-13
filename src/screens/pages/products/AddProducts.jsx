@@ -10,17 +10,7 @@ const AddProducts = () => {
       .required(' Product name is required')
       .min(3, 'Name must be at least 3 characters'),
     productcode: Yup.string().required('code is required'),
-    image: Yup.mixed()
-      .test(
-        "fileSize",
-        "File size is too large",
-        (value) => value && value.size <= 2000000
-      )
-      .test(
-        "fileFormat",
-        "Unsupported file format",
-        (value) => value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type)
-      ),
+  
     mrp: Yup.number().required(),
     costprice: Yup.number().required(),
     sellingprice: Yup.number().required(),

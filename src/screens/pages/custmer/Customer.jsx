@@ -1,65 +1,69 @@
-import React, { useState } from 'react';
-import { FaUserEdit } from 'react-icons/fa';
-import { IoTrashOutline } from 'react-icons/io5';
+import React from 'react';
+import { useCustomergetQuery } from '../../../api/slice/ApiSlice';
+import { useEffect } from 'preact/hooks';
 
 const Customer = () => {
-  const [customers, setCustomers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', mobile: '1234567890', city: 'New York' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', mobile: '0987654321', city: 'Los Angeles' },
-  ]);
+  
+
+  const { data, isLoading, error } = useCustomergetQuery();
 
 
-  const handleDelete = (id) => {
-    const updatedCustomers = customers.filter((customer) => customer.id !== id);
-    setCustomers(updatedCustomers);
-  };
 
-  const handleEdit = (id) => {
-    console.log(`Edit customer with id: ${id}`);
 
-  };
+
+  if (isLoading) return <div className='flex justify-center text-sky-800 text-4xl p-44'>Loading...</div>;
+  if (error) return <div className="flex justify-center text-sky-800 text-4xl p-44">Error fetching customers</div>;
+  const HandleDelete = () => {
+    return (
+      <div></div>
+    )
+  }
+  const HandleEdit = () => {
+    return (
+      <div></div>
+    )
+  }
 
   return (
-    <div className="max-w-4xl mx-auto  p-6 mt-16 bg-white rounded-md shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Customer Details</h1>
+    <div className="max-w-4xl mx-auto p-6 mt-16 bg-white rounded-md shadow-md">
+      <h1 className="text-2xl font-bold mb-4 text-center">Customer Details</h1>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white">
+      <div className="overflow-auto max-h-[500px]">
+        <table className="min-w-full bg-white table-auto">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Name</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Email</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Mobile</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">City</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Action</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Name</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Email</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Mobile</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">City</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
-              <tr key={customer.id}>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{customer.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{customer.email}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{customer.mobile}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{customer.city}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">
-
-                  <button
-                    onClick={() => handleEdit(customer.id)}
-                    className="text-blue-500 hover:text-blue-700 font-bold text-3xl py-1 px-3 rounded mr-2"
-                  >
-                    <FaUserEdit />
-                  </button>
-
-
-                  <button
-                    onClick={() => handleDelete(customer.id)}
-                    className="hover:text-red-400  text-red-600 font-bold py-1 px-3 rounded text-3xl"
-                  >
-                    <IoTrashOutline />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {
+              data?.data.slice().reverse().map((customer) => (
+                <tr key={customer.id}>
+                  <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.name}</td>
+                  <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.email}</td>
+                  <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.mobile}</td>
+                  <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.city}</td>
+                  <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">
+                    <button
+                      onClick={HandleEdit}
+                      className="px-2 py-1 bg-blue-500 text-white rounded-md mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={HandleDelete}
+                      className="px-2 py-1 bg-red-500 text-white rounded-md"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

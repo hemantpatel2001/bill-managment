@@ -1,9 +1,14 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useCustomeraddMutation } from '../../../api/slice/ApiSlice';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AddNewCustomer = () => {
-
+  
+  const [customeradd] = useCustomeraddMutation()
+  const navigate = useNavigate()
   const validationSchema = Yup.object({
     name: Yup.string()
       .required('Name is required')
@@ -27,14 +32,24 @@ const AddNewCustomer = () => {
 
 
   const onSubmit = (values, actions) => {
-    actions.setSubmitting(false);
-    actions.resetForm();
-    console.log('Form data:', values);
+    customeradd(values).then((res) => {
+      console.log(res)
+      toast.success(res.data.msg)
+      actions.setSubmitting(false);
+      actions.resetForm();
+      navigate("/layout/customers")
+    }).catch((error) => {
+     console.log(error)
+    })
+
+
+
+
 
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 mt-16 bg-white rounded-md shadow-md">
+    <div className="max-w-md mx-auto p-6 mt-24   bg-white rounded-md shadow-md">
       <h1 className="text-2xl font-bold mb-4">Add New Customer</h1>
 
       <Formik
@@ -59,7 +74,7 @@ const AddNewCustomer = () => {
               <ErrorMessage
                 name="name"
                 component="div"
-                
+
                 className="text-red-500 text-sm mt-1"
               />
             </div>

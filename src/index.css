@@ -3,10 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.image{
-    background-image: url("https://tse3.mm.bing.net/th?id=OIP.C2PJjRGlHewmznV33et45AHaHa&pid=Api&P=0&h=220");
-    width: 300px;
-    height: 200px;
+
+.login-image{
+    background-image: url("https://img.freepik.com/free-psd/shopping-sales-background_23-2150343498.jpg");
+
+
 }
-
-
