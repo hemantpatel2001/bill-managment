@@ -1,65 +1,47 @@
-import React, { useState } from 'react';
-import { FaUserEdit } from 'react-icons/fa';
-import { IoTrashOutline } from 'react-icons/io5';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useCustomergetQuery, useDeleteCustomerMutation } from '../../../api/slice/ApiSlice';
 
-const Products = () => {
-  const [products,setProducts] = useState([
-    { id: 1, name: 'sell', productcode : '123433', img: "", costprice: '45',sellingprice:"80" ,mrp:"100" },
-    { id: 2, name: 'machine ', productcode : '2443', img: "", costprice: '45',sellingprice:"80" ,mrp:"100" },
-  ]);
+const Customer = () => {
+  const { data, isLoading, error } = useCustomergetQuery();
 
 
-  const handleDelete = (id) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts);
-  };
 
-  const handleEdit = (id) => {
-    console.log(`Edit product with id: ${id}`);
 
-  };
+  if (isLoading) return <div className='flex justify-center text-sky-800 text-4xl p-44'>Loading...</div>;
+  if (error) return <div className="flex justify-center text-sky-800 text-4xl p-44">Error fetching customers</div>;
 
   return (
-    <div className="max-w-4xl mx-auto  p-6 mt-16 bg-white rounded-md shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Products Details</h1>
+    <div className="max-w-4xl mx-auto p-6 mt-16 bg-white rounded-md shadow-md">
+      <h1 className="text-2xl font-bold mb-4 text-center">Customer Details</h1>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white">
+      <div className="overflow-auto max-h-[500px]">
+        <table className="min-w-full bg-white table-auto">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Name</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Product Code</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Img</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Cost Price</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Selling Price</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Mrp</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600 tracking-wider">Action</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Name</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Email</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Mobile</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">City</th>
+              <th className="px-4 py-2 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.productcode}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.img}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.costprice}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.sellingprice}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">{product.mrp}</td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b text-sm leading-5 text-gray-700">
+            {data?.data.slice().reverse().map((customer) => (
+              <tr key={customer.id}>
+                <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.name}</td>
+                <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.email}</td>
+                <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.mobile}</td>
+                <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">{customer.city}</td>
+                <td className="px-4 py-3 whitespace-no-wrap border-b text-sm text-gray-700">
+
+                  <button className="px-2 py-1 bg-blue-500 text-white rounded-md mr-2">Edit</button>
 
                   <button
-                    onClick={() => handleEdit(product.id)}
-                    className="text-blue-500 hover:text-blue-700 font-bold text-3xl py-1 px-3 rounded mr-2"
-                  >
-                    <FaUserEdit />
-                  </button>
 
-
-                  <button
-                    onClick={() => handleDelete(product.id)}
-                    className="hover:text-red-400  text-red-600 font-bold py-1 px-3 rounded text-3xl"
+                    className="px-2 py-1 bg-red-500 text-white rounded-md"
                   >
-                    <IoTrashOutline />
+                    Delete
                   </button>
                 </td>
               </tr>
@@ -71,4 +53,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Customer;

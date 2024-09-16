@@ -11,6 +11,7 @@ import AddNewInvoice from '../screens/pages/invoice/AddNewInvoice';
 import Login from '../screens/Login';
 import Auth from '../authentic/Auth';
 import WithOutLogin from '../authentic/WithOutLogin';
+import UpdateCustomer from '../screens/pages/custmer/UpdateCustomer';
 
 
 
@@ -18,19 +19,20 @@ const router = createBrowserRouter([
 
     {
         path: '/',
-        element: <WithOutLogin><Login/></WithOutLogin>
+        element: <WithOutLogin><Login /></WithOutLogin>
     },
 
     {
         path: '/layout',
-        element:<Auth><Layout/></Auth> ,
+        element: <Layout />,
         children: [
-            { path: 'customers', element:<Auth><Customer /> </Auth> },
-            { path: "new-customer", element: <Auth><AddNewCustmor /></Auth> },
-            { path: "products", element: <Auth><Products /></Auth> },
-            { path: "add-product", element: <Auth><AddProducts /></Auth> },
+            { path: 'customers', element: <Customer /> },
+            { path: "new-customer", element: <AddNewCustmor /> },
+            { path: "products", element: <Products /> },
+            { path: "add-product", element: <AddProducts /> },
             { path: "invoices", element: <Auth><Invoices /></Auth> },
-            { path: "add-invoice", element: <Auth><AddNewInvoice /></Auth> }
+            { path: "add-invoice", element: <AddNewInvoice /> },
+            { path: "update-customer", element: <UpdateCustomer /> }
         ],
     },
 ]);

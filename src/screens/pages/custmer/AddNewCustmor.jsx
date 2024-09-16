@@ -40,6 +40,7 @@ const AddNewCustomer = () => {
       navigate("/layout/customers")
     }).catch((error) => {
      console.log(error)
+     actions.setSubmitting(false)
     })
 
 

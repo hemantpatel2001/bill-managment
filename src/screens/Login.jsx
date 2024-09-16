@@ -49,11 +49,12 @@ const Login = () => {
   };
 
   return (
+  
     <div
-      className=' login-image  flex justify-center items-center h-screen bg-cover bg-center'
+      className='  flex justify-center items-center h-screen bg-cover bg-center bg-transparent '
 
     >
-      <div className=' bg-transparent bg-white rounded shadow-lg p-20 w-[500px]'>
+      <div className='  bg-white rounded shadow-lg p-20 w-[500px] login-image '>
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
@@ -62,9 +63,9 @@ const Login = () => {
           {({ isSubmitting }) => (
             <Form>
               <div className='flex flex-col gap-4'>
-                <h1 className='font-bold text-5xl mb-8 text-sky-800 text-center'>Login</h1>
+                <h1 className='font-bold text-5xl mb-8 mr-14 text-sky-800 text-center'>Login</h1>
                 <div className='mb-4'>
-                  <label className='text-3xl text-white'>Email</label>
+                  <label className='text-3xl '>Email</label>
                   <Field
                     className="border p-1 border-sky-800 placeholder:p-2 text-xl mt-3 w-full outline-none"
                     name="email"
@@ -74,7 +75,7 @@ const Login = () => {
                   <ErrorMessage className='text-red-800 text-2xl' name="email" component="div" />
                 </div>
                 <div className='relative mb-4'>
-                  <label className='text-3xl text-white '>Password</label>
+                  <label className='text-3xl '>Password</label>
                   <Field
                     className="border p-1 border-sky-800 placeholder:p-3 text-xl mt-3 w-full outline-none"
                     name="password"

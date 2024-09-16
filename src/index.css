@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-.login-image{
-    background-image: url("https://img.freepik.com/free-psd/shopping-sales-background_23-2150343498.jpg");
-
-
+.login-image {
+    background-image: url("https://img.freepik.com/free-photo/shopping-bag-cart_23-2148879372.jpg");
+    background-size: contain;
+ 
 }
