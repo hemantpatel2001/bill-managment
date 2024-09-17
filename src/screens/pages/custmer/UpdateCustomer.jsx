@@ -1,14 +1,20 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useCustomeraddMutation } from '../../../api/slice/ApiSlice';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetcustmerbyidQuery } from '../../../api/slice/ApiSlice';
 
 const UpdateCustomer = () => {
 
-    const [customeradd] = useCustomeraddMutation()
-    const navigate = useNavigate()
+    const { id } = useParams()
+    console.log(id, "id");
+
+    const { data } = useGetcustmerbyidQuery(id)
+    console.log(data)
+
+
+
     const validationSchema = Yup.object({
         name: Yup.string()
             .required('Name is required')
@@ -32,21 +38,10 @@ const UpdateCustomer = () => {
 
 
     const onSubmit = (values, actions) => {
-        customeradd(values).then((res) => {
+        UpdateCustomer(_id).then((res) => {
             console.log(res)
-            toast.success(res.data.msg)
-            actions.setSubmitting(false);
-            actions.resetForm();
-            navigate("/layout/customers")
-        }).catch((error) => {
-            console.log(error)
-            actions.setSubmitting(false)
         })
-
-
-
-
-
+        console.log(values);
     };
 
     return (

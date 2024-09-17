@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const ApiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.9:1000' }),
-  tagTypes: ["Customer","delete"],
+  tagTypes: ["Customer", "delete" ,"Product"],
   endpoints: (builder) => ({
     getInvoiceHistory: builder.query({
       query: () => '/',
@@ -30,24 +30,63 @@ export const ApiSlice = createApi({
         method: 'GET',
         body
       }),
-      providesTags: ["Customer","delete"]
-      
+      providesTags: ["Customer", "delete"]
+
     }),
-  
+
     deleteCustomer: builder.mutation({
       query: (id) => ({
         url: `/customer/delete/${id}`,
         method: 'DELETE',
-        body:id
+        body: id
       }),
-invalidatesTags:["delete"]
+      invalidatesTags: ["delete"]
+    }),
+    getcustmerbyid: builder.query({
+      query: (id) => ({
+        url: `/customer/singleCustomer/${id}`,
+        method: 'GET',
+        body: id
+      }),
     }),
 
+    updatecustomer: builder.mutation({
+      query: (id) => ({
+        url: `/customer/singleCustomer/${id}`,
+        method: 'PUT',
+        body: id
+      }),
+    }),
+    /*products*/
 
+    productAdd: builder.mutation({
+      query: (body) => ({
+        url: '/product/create',
+        method: 'POST',
+        body
+      }),
+      invalidatesTags:["Product"]
+    }),
+    getproducts: builder.query({
+      query: (body) => ({
+        url: '/product/getAllProducts',
+        method: 'GET',
+        body
+      }),
+      providesTags:["Product"]
+    }),
   }),
 });
 
-export const { useLoginMutation,
+export const {
+  useLoginMutation,
   useCustomeraddMutation,
   useCustomergetQuery,
-  useUpdateCustomerMutation,useDeleteCustomerMutation } = ApiSlice;
+  useUpdateCustomerMutation,
+  useDeleteCustomerMutation,
+  useGetcustmerbyidQuery,
+  useUpdatecustomerMutation,
+  useProductAddMutation,
+  useGetproductsQuery
+
+} = ApiSlice;

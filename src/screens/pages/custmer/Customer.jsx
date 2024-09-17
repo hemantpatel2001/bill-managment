@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCustomergetQuery, useDeleteCustomerMutation } from '../../../api/slice/ApiSlice';
 
 
@@ -18,8 +18,8 @@ const Customer = () => {
       });
   };
   const HandeleEdit = (_id) => {
-    Navigate("/layout/update-customer")
-    console.log(_id)
+    Navigate(`/layout/update-customer/${_id}`)
+    
   }
 
   if (isLoading) return <div className='flex justify-center text-sky-800 text-4xl p-44'>Loading...</div>;

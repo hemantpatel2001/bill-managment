@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-
 import Layout from '../Sidebar/Layout';
 import Customer from '../screens/pages/custmer/Customer';
 import AddNewCustmor from '../screens/pages/custmer/AddNewCustmor';
@@ -24,15 +23,15 @@ const router = createBrowserRouter([
 
     {
         path: '/layout',
-        element: <Layout />,
+        element:<Auth><Layout/></Auth>  ,
         children: [
             { path: 'customers', element: <Customer /> },
             { path: "new-customer", element: <AddNewCustmor /> },
             { path: "products", element: <Products /> },
             { path: "add-product", element: <AddProducts /> },
-            { path: "invoices", element: <Auth><Invoices /></Auth> },
+            { path: "invoices", element: <Invoices /> },
             { path: "add-invoice", element: <AddNewInvoice /> },
-            { path: "update-customer", element: <UpdateCustomer /> }
+            { path:'update-customer/:id', element: <UpdateCustomer /> }
         ],
     },
 ]);

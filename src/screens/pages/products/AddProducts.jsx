@@ -2,39 +2,56 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { useProductAddMutation } from '../../../api/slice/ApiSlice';
+import { useNavigate } from 'react-router-dom';
 
 const AddProducts = () => {
 
+  const [productAdd, { data, isError, isLoading }] = useProductAddMutation()
+  const navigate = useNavigate()
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .required(' Product name is required')
+    productName: Yup.string()
+      .required('Product name is required')
       .min(3, 'Name must be at least 3 characters'),
-    productcode: Yup.string().required('code is required'),
-  
-    mrp: Yup.number().required(),
-    costprice: Yup.number().required(),
-    sellingprice: Yup.number().required(),
-  
+    productCode: Yup.string().required('code is required'),
+    MRP: Yup.number().required(),
+    costPrice: Yup.number().required(),
+    sellingPrice: Yup.number().required(),
+
 
 
 
   });
 
   const initialValues = {
-    name: "",
-    mrp: "",
-    productcode: "",
-    sellingprice: "",
-    costprice: "",
-    image: ""
+    productName: "",
+    MRP: "",
+    IMG: "",
+    productCode: "",
+    sellingPrice: "",
+    costPrice: "",
+
   };
 
 
   const onSubmit = (values, actions) => {
-    actions.setSubmitting(false);
-    actions.resetForm();
-    console.log('Form data:', values);
-    toast("data added")
+
+    productAdd(values).then((res) => {
+      console.log(res)
+      console.log(values)
+
+      actions.setSubmitting(false);
+      actions.resetForm();
+      toast("Product added")
+
+      navigate("/layout/products")
+    }).catch((err) => {
+      console.log(err)
+      actions.setSubmitting(false);
+      actions.resetForm();
+    })
+
+
 
   };
 
@@ -56,13 +73,13 @@ const AddProducts = () => {
               </label>
               <Field
                 type="text"
-                id="name"
-                name="name"
+                id="productName"
+                name="productName"
                 placeholder=" enter product name"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name="name"
+                name="productName"
                 component="div"
 
                 className="text-red-500 text-sm mt-1"
@@ -71,18 +88,18 @@ const AddProducts = () => {
 
             {/* product code Field */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Product Code
               </label>
               <Field
                 type="text "
-                id="roductcode"
-                name="productcode"
+                id="productCode"
+                name="productCode"
                 placeholder="product code"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name="productcode"
+                name="productCode"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />
@@ -90,18 +107,18 @@ const AddProducts = () => {
 
             {/*product image filed*/}
             <div className="mb-4">
-              <label htmlFor=" image" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="" className="block text-sm font-medium text-gray-700">
                 Img
               </label>
               <Field
-                type="file"
-                id=" image"
-                name=" image"
-                placeholder=" enter mobile "
+                type="text"
+                id="img"
+                name="img"
+                placeholder="enter image code in string  "
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name=" image"
+                name=" img"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />
@@ -110,18 +127,18 @@ const AddProducts = () => {
             {/*cost filed */}
 
             <div className="mb-4">
-              <label htmlFor="costprice" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Cost price
               </label>
               <Field
                 type="text"
-                id="costprice"
-                name="costprice"
+                id="costPrice"
+                name="costPrice"
                 placeholder="cost price"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name="costprice"
+                name="costPrice"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />
@@ -134,13 +151,13 @@ const AddProducts = () => {
               </label>
               <Field
                 type="text"
-                id="mrp"
-                name="mrp"
+                id="MRP"
+                name="MRP"
                 placeholder="MRP"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name="mrp"
+                name="MRP"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />
@@ -154,13 +171,13 @@ const AddProducts = () => {
               </label>
               <Field
                 type="text"
-                id="sellingprice"
-                name="sellingprice"
+                id="sellingPrice"
+                name="sellingPrice"
                 placeholder="sellingprice"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               <ErrorMessage
-                name="sellingprice"
+                name="sellingPrice"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />

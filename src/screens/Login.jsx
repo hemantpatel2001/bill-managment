@@ -26,17 +26,17 @@ const Login = () => {
 
     login({ email, password })
       .then((response) => {
-       
-        
+
+
         const token = response.data.token
         localStorage.setItem("auth", token)
-       
-        
+
+
         setSubmitting(false)
         if (token) {
           toast.success("login successfully")
           navigate("/layout")
-         
+
         }
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-  
+
     <div
       className='  flex justify-center items-center h-screen bg-cover bg-center bg-transparent '
 
